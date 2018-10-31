@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.apap.tutorial7.model.CarModel;
 import com.apap.tutorial7.model.DealerModel;
+import com.apap.tutorial7.rest.Setting;
 import com.apap.tutorial7.service.CarService;
 import com.apap.tutorial7.service.DealerService;
 
@@ -43,6 +44,12 @@ public class CarController {
     @Bean
     public RestTemplate rest() {
     	return new RestTemplate();
+    }
+    
+    @GetMapping(value = "/model/{namaProdusen}")
+    private String getModel(@PathVariable("namaProdusen") String namaProdusen) throws Exception {
+    	String path = Setting.carUrl + "/model?factory=" + namaProdusen;
+    	return restTemplate.getForEntity(path, String.class).getBody();
     }
     
     @PutMapping(value = "/{id}")

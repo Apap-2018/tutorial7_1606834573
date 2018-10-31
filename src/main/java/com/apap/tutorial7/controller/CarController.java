@@ -37,20 +37,6 @@ import org.springframework.web.client.RestTemplate;
 public class CarController {
     @Autowired
     private CarService carService;
-
-    @Autowired
-    RestTemplate restTemplate;
-    
-    @Bean
-    public RestTemplate rest() {
-    	return new RestTemplate();
-    }
-    
-    @GetMapping(value = "/model/{namaProdusen}")
-    private String getModel(@PathVariable("namaProdusen") String namaProdusen) throws Exception {
-    	String path = Setting.carUrl + "/model?factory=" + namaProdusen;
-    	return restTemplate.getForEntity(path, String.class).getBody();
-    }
     
     @PutMapping(value = "/{id}")
     private String updateCarSubmit (
